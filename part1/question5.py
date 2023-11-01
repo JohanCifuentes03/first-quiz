@@ -20,7 +20,11 @@
 
 sql_create_favorite_foods = """
 
-Your SQL here.
+CREATE TABLE favorite_foods (
+    food_id INTEGER
+    ,name TEXT
+    ,vegetarian INTEGER
+)
 
 """
 
@@ -30,7 +34,11 @@ Your SQL here.
 
 sql_alter_tables_with_favorite_food = """
 
-Your SQL here.
+ALTER TABLE Animals
+ADD COLUMN favorite_food_id INTEGER;
+
+ALTER TABLE people
+ADD COLUMN favorite_food_id INTEGER;
 
 """
 
@@ -39,7 +47,10 @@ Your SQL here.
 # THe output should be a list of tuples in the format: (<pet name>, <food name>)
 
 sql_select_all_vegetarian_pets = """
-
-Your SQL here.
-
+SELECT 
+    A.name
+    ,F.name
+FROM Animals AS A
+INNER JOIN favorite_foods AS F
+ON (A.favorite_food_id = F.food_id AND F.name NOT IN ('shrimp','termites'))
 """
